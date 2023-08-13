@@ -1,0 +1,68 @@
+/* Css writing rules
+- Distances always rem
+- Border Radius always px
+*/
+
+:root {
+    --black: #000000;
+    --white: #ffffff;
+    /* --grey: #8c8c8c; */
+    --blue: #1c337f;
+    --light-grey: #dcdcdc;
+    --light-grey-1: #f5f5f5;
+    --grey: #b4b4b4;
+    --grey-1: #c3c3c3;
+    --dark-grey: #828282;
+    --dark-grey-1: #8c8c8c;
+
+
+    --all-03s: all 0.3s;
+
+
+    /* Font Sizes */
+    --font-main-header: 30px;
+    --font-header: 20px;
+    --font-text: 16px;
+    --font-detail: 12px;
+    --font-min: 10px;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+
+    font-size: var(--font-text);
+    color: var(--black);
+    /* transition: var(--all-03s); */
+}
+
+h1 {
+    font-size: var(--font-main);
+}
+
+h3 {
+    font-size: var(--font-header);
+}
+
+
+/*Scroll Style*/
+/*Track*/
+*::-webkit-scrollbar {
+    width: 8px;
+}
+
+/* Handle */
+*::-webkit-scrollbar-track,
+*::-webkit-scrollbar-thumb {
+    background: transparent;
+    border-radius: 10px;
+}
+
+/* Handle on hover */
+*:hover::-webkit-scrollbar-thumb,
+*::-webkit-scrollbar-thumb:hover {
+    background: var(--grey);
+}
+
+/*Scroll end*/

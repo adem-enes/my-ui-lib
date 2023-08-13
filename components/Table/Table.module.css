@@ -1,0 +1,141 @@
+.container {
+    object-fit: contain;
+    container-type: inline-size;
+}
+
+@container (max-width: 480px) {
+    .table {
+        /* background: yellow; */
+    }
+
+    .table-caption {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .caption {
+        display: none;
+    }
+}
+
+.table-container {
+    width: 100%;
+    overflow: auto;
+}
+
+.table-caption {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    transition: var(--all-03s);
+}
+
+.table-caption div {
+    padding: 10px;
+    width: 100%;
+}
+
+.table {
+    table-layout: auto;
+    border-collapse: collapse;
+    font-size: var(--font-text);
+    border-radius: "10px";
+    user-select: none;
+}
+
+.thead {}
+
+.thead>tr {
+    border-bottom: solid var(--black);
+}
+
+.thead>tr th {
+    cursor: pointer;
+    user-select: none;
+    font-size: var(--font-text);
+    font-weight: bold;
+    padding: .75rem .95rem .75rem .75rem;
+    max-height: 50px;
+}
+
+.tbody {}
+
+.tbody tr,
+.tfoot tr {
+    padding: .65rem;
+    border: solid var(--light-grey);
+    transition: var(--all-03s);
+    border-width: 1px 0;
+    max-width: 250px;
+}
+
+.tbody tr:hover {
+    background: var(--grey);
+}
+
+.tbody tr td,
+.tfoot tr td {
+    padding: .65rem;
+    max-width: 10rem;
+    max-height: 3rem;
+}
+
+.tbody tr td {
+    white-space: nowrap;
+}
+
+.tbody tr td>div {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    background: inherit;
+    width: 100%;
+    max-height: 3rem;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.th-sort-asc,
+.th-sort-desc {
+    margin: 0;
+    position: relative;
+}
+
+.th-sort-asc::after,
+.th-sort-desc::after,
+.sort-arrow {
+    position: absolute;
+    right: .2rem;
+}
+
+.th-sort-asc::after {
+    content: "\2193";
+}
+
+.th-sort-desc::after {
+    content: "\2191";
+}
+
+.table-container::-webkit-scrollbar,
+.table-container *::-webkit-scrollbar {
+    width: 3px;
+    height: 10px;
+}
+
+/*Track*/
+.table-container::-webkit-scrollbar-track {
+    background: var(--grey-1);
+    /* border-radius: 0 0 10px 10px; */
+}
+
+/* Handle */
+.table-container::-webkit-scrollbar-thumb,
+.table-container:hover::-webkit-scrollbar-thumb {
+    background: var(--dark-grey);
+    /* border-radius: 0 0 10px 10px; */
+}
+
+/* Handle on hover */
+.table-container::-webkit-scrollbar-thumb:hover {
+    background: var(--dark-grey);
+}
