@@ -1,3 +1,5 @@
-export interface InputProps extends React.HtmlHTMLAttributes<HTMLInputElement> {
+import { InputHTMLAttributes } from "react";
+
+export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
     bgColor?: string
 }

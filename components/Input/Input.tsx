@@ -5,7 +5,7 @@ import { getBackground } from "../../utils";
 
 const defaultColor = getBackground();
 
-export default function Input({ bgColor = defaultColor, placeholder = "", ...props }: InputProps) {
+const Input = ({ bgColor = defaultColor, placeholder = "", ...props }: InputProps) => {
 
     return <label className={style["input-container"]}
         style={{ '--input-container-bg-color': bgColor } as React.CSSProperties}>
@@ -13,3 +13,5 @@ export default function Input({ bgColor = defaultColor, placeholder = "", ...pro
         <span>{placeholder}</span>
     </label>
 }
+
+export default Input;

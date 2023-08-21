@@ -1,6 +1,6 @@
-import { ReactNode } from "react"
+import { ReactNode, TableHTMLAttributes } from "react"
 
-export interface TableProps extends React.HtmlHTMLAttributes<HTMLTableElement> {
+export interface TableProps extends TableHTMLAttributes<HTMLTableElement> {
     headers: tableHeaders[],
     items: tableItems[],
     searchable?: boolean,
