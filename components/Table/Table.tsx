@@ -1,51 +1,69 @@
 import { useMemo, useState } from "react";
 import styles from "./Table.module.css";
-import { TableProps } from "./tableTypes";
+import { TableProps, tableHeaders, tableItems } from "./tableTypes";
 import Input from "../Input/Input";
+import { compareValues } from "../../utils";
 
-const isSortable = (sortable: boolean | undefined) => (sortable || sortable === undefined) ? true : false;
+// Utility function to convert property path string to array
+const getPropertyPathArray = (path: string): string[] => {
+    return path.split(".");
+};
+
+const isSortable = (sortable: boolean | undefined) => sortable !== false;
+
 type sortType = {
     name: string,
     asc: boolean
 }
 
 const Table = ({ footer = undefined, headers, items, searchable = false, ...props }: TableProps) => {
-    const columns = headers.map(h => { return { ...h, value: h.value.split('.') } });
     const [sort, setSort] = useState<sortType>({ name: "", asc: true });
     const [searchText, setSearchText] = useState<string>("");
 
-
-    const getItemValue = (value: any, header: string[]) => {
-        if (header.length === 1) return value[header[0]];
-        else if (header.length > 1) {
-            let finalValue = value;
-            for (let i = 0; i < header.length; i++)
-                finalValue = finalValue[header[i]]
-            return finalValue;
-        }
-        return null;
+    const getItemValue = (item: any, header: string) => {
+        const headerValuePath = getPropertyPathArray(header);
+        return headerValuePath.reduce((value, prop) => value && value[prop], item);
     }
 
-    const getCellValue = (item: any, header: any) => {
-        if (!!header.type) return header.type(getItemValue(item, header.value));
+    const renderCellContent = (item: any, header: tableHeaders) => {
+        if (header.cellRenderer) {
+            const customRendererContent = header.cellRenderer(getItemValue(item, header.value));
+            return customRendererContent != null ? customRendererContent : '-';
+        }
         return getItemValue(item, header.value);
     }
 
-    const sortBy = (name: string[]) => {
+    const sortBy = (name: string) => {
         name.toString() === sort.name
-            ? setSort({ ...sort, asc: !sort.asc })
+            ? setSort((prev) => ({ ...prev, asc: !prev.asc }))
             : setSort({ asc: true, name: name.toString() });
-        // filterTable();
     }
 
-    const filterTable = useMemo(() => items.filter(item => {
-        let value;
-        columns.forEach(h => isSortable(h.sortable)
-            && getItemValue(item, h.value)?.toString().toLocaleLowerCase().includes(searchText.toLocaleLowerCase())
-            && (value = item)
-        );
-        return value;
-    }), [searchText]);
+    const filterAndSortItems = (data: tableItems[]) => {
+        const filteredItems = data.filter(item => {
+            return headers.some(header => {
+                if (isSortable(header.sortable) && searchText) {
+                    const value = getItemValue(item, header.value);
+                    return value && value.toString().toLowerCase().includes(searchText.toLowerCase());
+                }
+                return true;
+            });
+        });
+
+        if (sort.name) {
+            filteredItems.sort((a, b) => {
+                const aValue = getItemValue(a, sort.name);
+                const bValue = getItemValue(b, sort.name);
+                return sort.asc ? compareValues(aValue, bValue) : compareValues(bValue, aValue);
+            });
+        }
+
+        return filteredItems;
+    };
+
+    const visibleItems = useMemo(() => {
+        return filterAndSortItems(items);
+    }, [items, searchText, sort]);
 
     return (<div className={styles.container}>
         <div className={styles["table-caption"]}>
@@ -60,7 +78,7 @@ const Table = ({ footer = undefined, headers, items, searchable = false, ...prop
             <table {...props} className={styles.table}>
                 <thead className={styles.thead}>
                     <tr>
-                        {columns.map((header, index) => (
+                        {headers.map((header, index) => (
                             (header.isShown !== false) && <th key={index}
                                 className={sort.name === header.value.toString() ?
                                     styles[sort.asc ? "th-sort-asc" : "th-sort-desc"] : ""}
@@ -74,16 +92,16 @@ const Table = ({ footer = undefined, headers, items, searchable = false, ...prop
                 </thead>
                 <tbody className={styles.tbody}>
                     {items.length <= 0 ?
-                        (<tr><td colSpan={columns.length} style={{ textAlign: "center" }}>
+                        (<tr><td colSpan={headers.length} style={{ textAlign: "center" }}>
                             <div>No Items</div>
                         </td></tr>)
-                        : filterTable.map((item, index) => (
+                        : visibleItems.map((item, index) => (
                             <tr key={index} className="tr-row">
-                                {columns.map((header, i) => (
+                                {headers.map((header, i) => (
                                     (header.isShown !== false) && <td key={i}
                                         align={header?.align ? header.align : "left"}>
                                         <div>
-                                            {getCellValue(item, header)}
+                                            {renderCellContent(item, header)}
                                         </div>
                                     </td>
                                 ))}

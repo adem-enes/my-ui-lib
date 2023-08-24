@@ -14,7 +14,9 @@ export type tableHeaders = {
     sortable?: boolean,
     isShown?: boolean,
     align?: "center" | "left" | "right" | "justify" | "char" | undefined,
-    type?: (value: string) => string | ReactNode | undefined
+    cellRenderer?: (value: string) => string | ReactNode | undefined
 }
 
-export type tableItems = any;
+export type tableItems = {
+    [key: string]: any; // This allows any property name and value
+};
