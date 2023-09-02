@@ -1,5 +1,6 @@
 import { InputHTMLAttributes } from "react";
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-    bgColor?: string
+    bgColor?: string,
+    variant?: "outlined" | "standard" | "filled"
 }

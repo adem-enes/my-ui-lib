@@ -1,6 +1,6 @@
 .input-container *:before,
 .input-container *:after {
-  background: var(--input-container-bg-color);
+  background: var(--input-background-color);
 }
 
 .input-container,
@@ -17,47 +17,76 @@
 }
 
 .input-container>input {
-  border: 1px solid var(--black);
-  border-radius: 5px;
+  margin-top: .5rem;
   padding: 0.3rem 0.5rem;
   outline: none;
-  background-color: var(--input-container-bg-color);
+  background-color: var(--input-background-color);
+}
+
+.input-outlined {
+  border: 1px solid var(--black);
+  border-radius: 5px;
+}
+
+.input-standard {
+  border: none;
+  padding-left: 0.2rem !important;
+  border-bottom: 1px solid var(--black);
 }
 
 .input-container>span {
   line-height: 1.1rem;
   position: absolute;
-  left: 15px;
-  top: calc(50% - 0.6rem);
   color: var(--grey);
   transition: var(--all-03s);
   z-index: 1;
   user-select: none;
   background-color: transparent;
+  bottom: .3rem;
 }
 
-.input-container>span:before {
+.input-container:has(>.input-outlined)>span {
+  left: 15px;
+}
+
+.input-container:has(>.input-standard)>span {
+  left: 0.2rem;
+}
+
+.input-container:has(>.input-outlined)>span:before {
   position: absolute;
-  bottom: 0;
+  bottom: .05rem;
   content: "";
   width: 100%;
-  height: 45%;
+  height: 40%;
   z-index: -1;
 }
 
 .input-container>input:focus+span,
 .input-container>input:not(:placeholder-shown)+span {
-  line-height: 0.7rem;
-  top: -0.4rem;
   color: var(--black);
   font-weight: bold;
   font-size: var(--font-detail);
+  line-height: 1rem;
 }
+
+.input-outlined:focus+span,
+.input-outlined:not(:placeholder-shown)+span {
+  bottom: 1.43rem;
+}
+
+.input-standard:focus+span,
+.input-standard:not(:placeholder-shown)+span {
+  bottom: 1.43rem;
+}
+
+
 
 
 /*CheckBox*/
 .input-container-checkbox {
-  display: block; /*input checkbox have an display: inline. So To change width we need to change it first*/
+  display: block;
+  /*input checkbox have an display: inline. So To change width we need to change it first*/
   width: 100%;
   user-select: none;
 }

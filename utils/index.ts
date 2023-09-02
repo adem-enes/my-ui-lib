@@ -1,2 +1,2 @@
-export { getBackground } from './background';
+export { getBackground, findClosestBackground } from './background';
 export { compareValues } from './sorting';
