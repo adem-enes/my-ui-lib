@@ -34,6 +34,25 @@
   border-bottom: 1px solid var(--black);
 }
 
+
+/*Tring to remove span element*/
+/* .input-container>input::placeholder {
+  color: var(--grey);
+  font-size: var(--font-text);
+  z-index: 1;
+  transition: var(--all-03s);
+  transform-origin: left bottom;
+  transform: translate(0, 0) scale(1);
+}
+
+.input-container>input:focus::placeholder,
+.input-container>input:not(:placeholder-shown)::placeholder {
+  font-size: var(--font-detail);
+  transform: translate(0, -100%) scale(0.8);
+  color: var(--black);
+} */
+
+
 .input-container>span {
   line-height: 1.1rem;
   position: absolute;
@@ -79,7 +98,6 @@
 .input-standard:not(:placeholder-shown)+span {
   bottom: 1.43rem;
 }
-
 
 
 

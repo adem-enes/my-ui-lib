@@ -1,0 +1,56 @@
+.form-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    container-type: inline-size;
+}
+
+.form-container > *:not(:last-child){
+    padding: .3rem;
+}
+
+.form-has-border {
+    padding: .5rem;
+    border: 1px solid var(--black);
+    border-radius: .7rem;
+}
+
+.form-buttons {
+    width: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+    gap: .3rem;
+    min-height: 2rem;
+    margin-top: .5rem;
+}
+
+.form-buttons>input[type='submit'],
+.form-buttons>input[type='reset'] {
+    border: none;
+    padding: .3rem;
+    min-width: 25%;
+    color: var(--black);
+    border-radius: .35rem;
+    font: var(--font-text);
+    transition: var(--all-03s);
+}
+
+.form-buttons>input[type='submit'] {
+    background-color: steelblue;
+}
+
+.form-buttons>input[type='reset'] {
+    background-color: tomato;
+}
+
+.form-buttons>input[type='submit']:is(:hover, :focus),
+.form-buttons>input[type='reset']:is(:hover, :focus) {
+    filter: brightness(0.8);
+}
+
+@container (max-width: 480px) {
+    .form-buttons {
+        flex-direction: column;
+    }
+}
