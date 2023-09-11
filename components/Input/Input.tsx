@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import styles from "./Input.module.css";
 import { InputProps } from "./index";
-import { getBackground, findClosestBackground } from "../../utils";
+import { findClosestBackground } from "../../utils";
 
 
 const Input = ({ bgColor, variant = "outlined", placeholder = "", containerStyle, ...props }: InputProps) => {
@@ -23,12 +23,14 @@ const Input = ({ bgColor, variant = "outlined", placeholder = "", containerStyle
     } else if (variant === "standard") {
         inputClassName = styles["input-standard"];
     }
-
-    return <label className={styles["input-container"]} ref={inputRef} style={containerStyle}>
-        <input type="text" name="name" placeholder=" "
-            className={inputClassName + (props.className ? (" " + props.className) : "")} {...props} />
-        <span>{placeholder}</span>
-    </label>
+    
+    return <div style={{ width: '100%', ...containerStyle }}>
+        <label className={styles["input-container"]} ref={inputRef} >
+            <input type="text" name="name" placeholder=" "
+                className={inputClassName + (props.className ? (" " + props.className) : "")} {...props} />
+            <span>{placeholder}</span>
+        </label>
+    </div>
 }
 
 export default Input;

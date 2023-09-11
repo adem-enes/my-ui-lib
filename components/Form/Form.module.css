@@ -6,8 +6,9 @@
     container-type: inline-size;
 }
 
-.form-container > *:not(:last-child){
-    padding: .3rem;
+.form-container>* {
+    padding: 0 0.3rem;
+    margin-bottom: 0.3rem;
 }
 
 .form-has-border {
