@@ -1,7 +1,15 @@
 import { CSSProperties, InputHTMLAttributes } from "react";
 
-export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+interface GeneralInputProps extends InputHTMLAttributes<HTMLInputElement> {
+    containerStyle?: CSSProperties,
+}
+
+export interface InputProps extends GeneralInputProps {
     bgColor?: string,
     variant?: "outlined" | "standard" | "filled",
-    containerStyle?: CSSProperties
 }
+
+export interface CheckboxProps extends GeneralInputProps {
+    type?: "checkbox"
+}
+

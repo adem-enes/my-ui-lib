@@ -35,6 +35,8 @@
     border-radius: .35rem;
     font: var(--font-text);
     transition: var(--all-03s);
+    cursor: pointer;
+    outline: none;
 }
 
 .form-buttons>input[type='submit'] {

@@ -74,10 +74,10 @@
 
 .input-container:has(>.input-outlined)>span:before {
   position: absolute;
-  bottom: .05rem;
+  bottom: .20rem;
   content: "";
   width: 100%;
-  height: 40%;
+  height: 30%;
   z-index: -1;
 }
 
@@ -99,7 +99,209 @@
   bottom: 1.43rem;
 }
 
+/* Input type styles*/
+/*File*/
+.input-container>input[type="file"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  font-weight: lighter;
+  display: inline-block;
+  cursor: pointer;
+}
 
+.input-container>input[type="file"]::before {
+  content: '\1F4C2';
+  min-width: 30%;
+  padding: 0 1.5rem;
+  line-height: 1rem;
+  background-color: var(--light-grey);
+  border-radius: 3px;
+  margin-right: .3rem;
+}
+
+.input-container>input[type="file"]::file-selector-button {
+  display: none;
+}
+
+/*Date*/
+.input-container>input:is([type="date"], [type="datetime-local"], [type="month"], [type="time"], [type="week"]) {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  padding: 0.2375rem 0.4rem;
+}
+
+.input-container>input:is([type="date"], [type="datetime-local"], [type="month"], [type="time"], [type="week"])::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  font-size: var(--font-text);
+  padding: 0;
+  margin: 0;
+}
+
+/*Range, Color*/
+.input-container>input[type="color"] {
+  position: relative;
+  cursor: pointer;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  outline: none;
+  padding: 0;
+  height: 1.881rem;
+}
+
+.input-container>input[type="color"]::after {
+  content: attr(value);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: transparent;
+}
+
+input[type="color"]::-webkit-color-swatch-wrapper {}
+
+input[type="color"]::-webkit-color-swatch {
+  border: none;
+  border-radius: 5px;
+}
+
+.input-container>input[type="range"] {
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 1.881rem;
+
+}
+
+/* Style the track (the "line" of the range input) */
+input[type="range"]::-webkit-slider-runnable-track {
+  background: var(--grey-1);
+  border-radius: 100px;
+}
+
+/* Style the thumb (the draggable handle) */
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
+  width: 30px;
+  height: 20px;
+  border-radius: 100px;
+  background: var(--black);
+}
+
+/* Change the appearance of the thumb on hover */
+input[type="range"]::-webkit-slider-thumb:hover {
+  background: var(--dark-grey);
+}
+
+/*Button*/
+.input-container>input[type="button"] {
+  cursor: pointer;
+  transition: var(--all-03s);
+}
+
+.input-container>input[type="button"]:hover {
+  filter: brightness(0.8);
+}
+
+.input-container>input[type="button"]+span {
+  position: absolute;
+  color: var(--black);
+  transition: var(--all-03s);
+  background-color: transparent;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  line-height: 1rem;
+}
+
+.input-container>input[type="button"]+span::before {
+  display: none;
+}
+
+.input-container>input[type="button"]:focus+span,
+.input-container>input[type="button"]:not(:placeholder-shown)+span {
+  bottom: auto;
+}
+
+/*Search*/
+.input-container>input[type="search"] {}
+
+.input-container>input[type="search"]::-webkit-search-cancel-button {
+  appearance: none;
+  display: inline-block;
+  width: var(--font-text);
+  height: var(--font-text);
+  cursor: pointer;
+  opacity: 0.5;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.input-container>input[type="search"]::-webkit-search-cancel-button:hover {
+  opacity: 1;
+}
+
+/*CheckBox, Radio*/
+.input-container:has(input:is([type="radio"], [type="checkbox"])) {
+  display: block;
+  width: 100%;
+  user-select: none;
+  cursor: default;
+}
+
+.input-container>input:is([type="radio"], [type="checkbox"]) {
+  appearance: none;
+  margin: 0;
+  cursor: pointer;
+  /*This helps us to remove default check*/
+  vertical-align: text-bottom;
+  width: 1.2rem;
+  height: 1.2rem;
+  border: 1px solid var(--black);
+  border-radius: 5px;
+  transition: var(--all-03s);
+}
+.input-container>input[type="radio"] {
+  border-radius: 50%;
+}
+
+.input-container>input:is([type="radio"], [type="checkbox"])+span {
+  display: block;
+  padding-left: .3rem;
+  font-size: var(--font-text);
+  font-weight: normal;
+}
+
+.input-container>input:is([type="radio"], [type="checkbox"])+span::before {
+  display: none;
+}
+
+.input-container>input:is([type="radio"], [type="checkbox"])::placeholder-shown{
+  /* background-color: transparent; */
+}
+.input-container>input:is([type="radio"], [type="checkbox"]):focus+span,
+.input-container>input:is([type="radio"], [type="checkbox"]):not(:placeholder-shown)+span {
+  bottom: 0;
+}
+
+.input-container>input:is([type="radio"], [type="checkbox"]):checked {
+  background-color: var(--blue);
+  color: var(--white);
+}
+
+.input-container>input:is([type="radio"], [type="checkbox"]):checked:after {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: var(--font-detail);
+  font-weight: bold;
+  content: '\2713';
+  background-color: transparent;
+}
 
 /*CheckBox*/
 .input-container-checkbox {

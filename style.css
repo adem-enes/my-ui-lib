@@ -25,12 +25,15 @@
     --font-text: 16px;
     --font-detail: 12px;
     --font-min: 10px;
+
+    --font-family: "Arial";
 }
 
 * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    font-family: var(--font-family);
 
     font-size: var(--font-text);
     color: var(--black);
