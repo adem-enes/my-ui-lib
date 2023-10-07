@@ -5,7 +5,7 @@ import { CheckboxProps } from "./index";
 
 export default function CheckBox({ type = "checkbox", containerStyle, ...props }: CheckboxProps) {
     return <label className={style["input-container-checkbox"]} style={containerStyle}>
-        <input type={type ?? "checkbox"} name="name" placeholder=" " {...props} />
+        <input type={type} name="name" placeholder=" " {...props} />
         <span>Input</span>
     </label>
 }

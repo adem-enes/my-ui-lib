@@ -4,7 +4,7 @@ import { InputProps } from "./index";
 import { findClosestBackground } from "../../utils";
 
 
-const Input = ({ bgColor, variant = "outlined", placeholder = "", containerStyle, ...props }: InputProps) => {
+const Input = ({ bgColor, variant = "outlined", placeholder = "", col = 12, containerStyle, ...props }: InputProps) => {
     const inputRef = useRef<HTMLLabelElement | null>(null);
 
     useEffect(() => {
@@ -23,8 +23,8 @@ const Input = ({ bgColor, variant = "outlined", placeholder = "", containerStyle
     } else if (variant === "standard") {
         inputClassName = styles["input-standard"];
     }
-    
-    return <div style={{ width: '100%', ...containerStyle }}>
+
+    return <div style={{ ...containerStyle }} className={`col-${col}`}>
         <label className={styles["input-container"]} ref={inputRef} >
             <input type="text" name="name" placeholder=" "
                 className={inputClassName + (props.className ? (" " + props.className) : "")} {...props} />
