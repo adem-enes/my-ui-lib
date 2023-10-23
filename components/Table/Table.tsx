@@ -1,8 +1,8 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import styles from "./Table.module.css";
 import { TableProps, tableHeaders, tableItems } from "./tableTypes";
 import Input from "../Input/Input";
-import { compareValues } from "../../utils";
+import { compareValues, findClosestBackground } from "../../utils";
 
 // Utility function to convert property path string to array
 const getPropertyPathArray = (path: string): string[] => {
@@ -19,6 +19,15 @@ type sortType = {
 const Table = ({ footer = undefined, headers, items, searchable = false, ...props }: TableProps) => {
     const [sort, setSort] = useState<sortType>({ name: "", asc: true });
     const [searchText, setSearchText] = useState<string>("");
+    const tableRef = useRef<HTMLTableElement | null>(null);
+
+    useEffect(() => {
+        const defaultColor = findClosestBackground(tableRef.current);
+        // Apply the default color directly to the CSS variable.
+        if (tableRef.current) {
+            tableRef.current.style.setProperty('--input-background-color', defaultColor);
+        }
+    }, []);
 
     const getItemValue = (item: any, header: string) => {
         const headerValuePath = getPropertyPathArray(header);
@@ -68,14 +77,12 @@ const Table = ({ footer = undefined, headers, items, searchable = false, ...prop
     return (<div className={styles.container}>
         <div className={styles["table-caption"]}>
             {!!props.caption ? <div><h3>{props.caption}</h3></div> : <div className={styles.caption}></div>}
-            {searchable ? <div><Input style={{
-                border: "none", borderRadius: 0,
-                borderBottom: "1px solid var(--black)",
-            }} onChange={(e) => setSearchText((e.target as HTMLInputElement).value)} placeholder="Search" /></div>
+            {searchable ? <div><Input variant="standard" placeholder="Search" type="search"
+                onChange={(e) => setSearchText((e.target as HTMLInputElement).value)} /></div>
                 : null}
         </div>
         <div className={styles["table-container"]}>
-            <table {...props} className={styles.table}>
+            <table {...props} className={styles.table} ref={tableRef}>
                 <thead className={styles.thead}>
                     <tr>
                         {headers.map((header, index) => (
