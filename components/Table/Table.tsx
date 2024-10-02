@@ -75,12 +75,14 @@ const Table = ({ footer = undefined, headers, items, searchable = false, ...prop
     }, [items, searchText, sort]);
 
     return (<div className={styles.container}>
-        <div className={styles["table-caption"]}>
-            {!!props.caption ? <div><h3>{props.caption}</h3></div> : <div className={styles.caption}></div>}
-            {searchable ? <div><Input variant="standard" placeholder="Search" type="search"
-                onChange={(e) => setSearchText((e.target as HTMLInputElement).value)} /></div>
-                : null}
-        </div>
+        {props.caption || searchable && (
+            <div className={styles["table-caption"]}>
+                {props.caption ? <div><h3>{props.caption}</h3></div> : <div className={styles.caption}></div>}
+                {searchable ? <div><Input variant="standard" placeholder="Search" type="search"
+                    onChange={(e) => setSearchText((e.target as HTMLInputElement).value)} /></div>
+                    : null}
+            </div>
+        )}
         <div className={styles["table-container"]}>
             <table {...props} className={styles.table} ref={tableRef}>
                 <thead className={styles.thead}>
