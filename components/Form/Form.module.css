@@ -1,18 +1,14 @@
 .form-container {
     width: 100%;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: wrap;
+    gap: 1rem;
     container-type: inline-size;
 }
 
-.form-container>* {
-    padding: 0 0.3rem;
-    margin-bottom: 0.3rem;
-}
-
 .form-has-border {
-    padding: .5rem;
+    padding: 1rem;
     border: 1px solid var(--black);
     border-radius: .7rem;
 }
@@ -23,7 +19,6 @@
     flex-direction: row-reverse;
     gap: .3rem;
     min-height: 2rem;
-    margin-top: .5rem;
 }
 
 .form-buttons>input[type='submit'],
