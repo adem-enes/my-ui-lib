@@ -14,7 +14,7 @@ export type tableHeaders = {
     sortable?: boolean,
     isShown?: boolean,
     align?: "center" | "left" | "right" | "justify" | "char" | undefined,
-    cellRenderer?: (value: string) => string | ReactNode | undefined
+    cellRenderer?: (value: any) => string | ReactNode | undefined
 }
 
 export type tableItems = {
