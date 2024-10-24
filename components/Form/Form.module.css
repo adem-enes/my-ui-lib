@@ -47,6 +47,11 @@
     filter: brightness(0.8);
 }
 
+.form-buttons>input[type='submit']:active,
+.form-buttons>input[type='reset']:active {
+    transform: scale(0.95);
+}
+
 
 @container (max-width: 767px) {
 
