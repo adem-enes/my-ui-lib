@@ -5,7 +5,8 @@ export interface TableProps extends TableHTMLAttributes<HTMLTableElement> {
     items: tableItems[],
     searchable?: boolean,
     footer?: ReactNode,
-    caption?: string
+    caption?: string,
+    onClick?: (item: any) => void
 }
 
 export type tableHeaders = {

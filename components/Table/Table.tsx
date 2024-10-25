@@ -16,7 +16,7 @@ type sortType = {
     asc: boolean
 }
 
-const Table = ({ footer = undefined, headers, items, searchable = false, ...props }: TableProps) => {
+const Table = ({ footer = undefined, headers, items, searchable = false, onClick, ...props }: TableProps) => {
     const [sort, setSort] = useState<sortType>({ name: "", asc: true });
     const [searchText, setSearchText] = useState<string>("");
     const tableRef = useRef<HTMLTableElement | null>(null);
@@ -105,7 +105,11 @@ const Table = ({ footer = undefined, headers, items, searchable = false, ...prop
                             <div>No Items</div>
                         </td></tr>)
                         : visibleItems.map((item, index) => (
-                            <tr key={index} className="tr-row">
+                            <tr
+                                key={index}
+                                className="tr-row"
+                                style={{ cursor: onClick ? 'pointer' : 'default' }}
+                                onClick={() => onClick ? onClick(item) : undefined}>
                                 {headers.map((header, i) => (
                                     (header.isShown !== false) && <td key={i}
                                         align={header?.align ? header.align : "left"}>
