@@ -1,4 +1,3 @@
-import React from 'react';
 import style from "./Input.module.css";
 import { CheckboxProps } from "./index";
 // import { getBackground } from "../../utils";

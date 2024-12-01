@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import { Fragment } from 'react'
 import styles from './Popover.module.css'
 import { ActionListItem, ActionListProps } from '.'
 

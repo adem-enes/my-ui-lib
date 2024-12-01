@@ -45,7 +45,8 @@ class BooleanComparer implements ValueComparer {
 
 class DefaultComparer implements ValueComparer {
     canCompare(aValue: any, bValue: any) {
-        return true;
+        return aValue.toString().localeCompare(bValue.toString());
+        // return true;
     }
 
     compare(aValue: any, bValue: any) {
